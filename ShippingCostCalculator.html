@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>With CSS</title>
+  <style>
+
+
+  </style>
+</head>
+<body>
+  <p>Shipping Calculator</p>
+  <p>Orders under $40 = +$10 Shipping fee</p>
+  <p>Orders over $40 = Free Shipping</p>
+  <input class="js-orderCostInput" type="number" placeholder="Enter cost of order" type="textbox">
+  <button class="calcButton">Calculate</button>
+  <p class="totalCost">Total price:</p>
+  <input class="js-onKeyInput" placeholder="Enter text" type="textbox">
+  <div id="inputDiv"></div>
+
+  <script>
+    const price = document.querySelector('.js-orderCostInput');
+    const total = document.querySelector('.totalCost');
+    const calcButton = document.querySelector('.calcButton');
+
+    calcButton.addEventListener('click', calcTotal);
+    price.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        calcTotal();
+      }
+    });
+
+    function calcTotal() {
+      let orderCost = +price.value*100;
+      if (orderCost < 0) {
+        price.value = '';
+        price.placeholder = 'Please enter a positive value';
+        orderCost = 0;
+        total.innerText = `Total price: $${orderCost / 100}`;
+      } else if (orderCost < 4000 && orderCost > 0) {
+        orderCost += 1000;
+        total.innerText = `Total price: $${orderCost / 100}`;
+        price.value = '';
+        price.placeholder = 'Enter cost of order';
+      } else {
+        total.innerText = `Total price: $${orderCost / 100}`;
+        price.value = '';
+      }
+    }
+
+    const onKey = document.querySelector('.js-onKeyInput');
+    let inputDiv = '';
+
+    onKey.addEventListener('keyup', () => {
+      let inputDiv = document.getElementById('inputDiv');
+      inputDiv.textContent = onKey.value
+    })
+    </script>
+</body>
+</html>
