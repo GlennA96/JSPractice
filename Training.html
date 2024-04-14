@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Training JS</title>
+    <link rel="stylesheet" href=Training.css>
+</head>
+<body>
+    <script src="Training.js"></script>
+    <div>
+        Cockass
+    </div>
+    <div id="countere">0</div>
+    <button id="addOneButton" onclick="addOne()">Up</button>
+    <button id="decOneButton" onclick="decOne()">Down</button>
+    <script>
+        let countd = 0;
+        function addOne(){
+        countd += 1;
+        updatedCount();
+        }
+    
+        function decOne(){
+        countd -= 1;
+        updatedCount();
+        }
+
+        function updatedCount(){
+        let countered = document.getElementById("countere");
+        countered.innerText = countd;
+      }       
+    </script>
+
+
+    <div> 
+    <input id='todo-title' type="text">
+    <button onclick="addTodo()">Add to list</button>
+    
+    <script>
+     let age = 90;
+     let message = "I am " + age + " years of age";
+     console.log(message);
+     let todosx = ['fuck babes', 'smoke crack', 'finger ass']     
+
+
+     function addTodo(){
+        let textbos = document.getElementById('todo-title');
+        let title = textbos.value;
+        todosx.push(title);
+        }
+    </script>
+    </div>
+<div>
+    <button id="torsg" onclick="changeToDone()"></button>
+     <script>
+        function changeToDone(){
+            let button = document.getElementById('torsg');
+            button.innerText = 'Done';
+        }
+    
+     </script>
+    </div>
+
+<!--Adding a Div with an textbox-->
+<input id="addingText" type="text" placeholder="bananmana" />
+<button onclick="addText()">Add text</button>
+
+<script>
+    function addText(){
+    let textbox = document.getElementById('addingText');
+    let textAdd = textbox.value;
+    let div = document.createElement('div');  
+    div.innerText = textAdd
+    listToDo.appendChild(div);    
+}
+</script>
+<br>
+<!--Add to the list with date-->
+<input id="addingStuff" type="text" placeholder="bananmanana" />
+ <input id="dateToDos" type="date">
+ <button onclick="addStuffToDo()">Add texts</button>
+ <div id="listToDo"></div>
+
+ <script>
+  let stuffToDo = [{
+    title: 'fuck',
+    dueDate: '2000-11-11',
+    id: 'id1'
+  }, {
+    title: 'eat',
+    dueDate: 'asap',
+    id: 'id2'
+  }, {
+    title: 'sleep',
+    dueDate: 'tonight',
+    id: 'id3'
+  }];
+
+  render();
+
+  function addStuffToDo(){
+    let textboxs = document.getElementById('addingStuff');
+    const title = textboxs.value;
+    const datePickers = document.getElementById('dateToDos');
+    const dueDate = datePickers.value;
+    //gives an ID thats the current time in milliseconds (unique ID) add '' to make it into a string
+    const id = '' + new Date().getTime();
+    stuffToDo.push({
+        title: title,
+        dueDate: dueDate,
+        id: id
+     });
+    
+  render();
+ }
+  function deleteTodo(deleteTask){
+    console.log(deleteTask);
+    const deleteButton = deleteTask.target;
+    const idToDelete = deleteButton.id;
+    stuffToDo = stuffToDo.filter(function (todo){
+        //If Id for Todo matches idToDelete, return false (remove)
+        //For no match, return true (keep)
+        if (todo.id === idToDelete){
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+    render();
+}
+
+  function render() {
+    document.getElementById('listToDo').innerHTML = '';
+
+    stuffToDo.forEach(function (stuffToDos){
+    let element = document.createElement('div');
+    element.innerText = stuffToDos.title + ' ' + stuffToDos.dueDate;
+    let listToDos = document.getElementById('listToDo');
+    listToDos.appendChild(element);
+
+    const deletionButton = document.createElement('button');
+    deletionButton.innerText = 'X';
+    deletionButton.style = 'margin-left: 10px', 'font-size: 11';
+    deletionButton.onclick = deleteTodo;
+    //set an ID on the delete button
+    deletionButton.id = stuffToDos.id;
+    element.appendChild(deletionButton);
+
+  });
+  }
+ </script>
+
+<br>
+<button id="addbutton" onclick="addGrocery('Apple')">Apple</button>
+<button id="addbutton" onclick="addGrocery('Tomato')">Tomato</button>
+<button id="addbutton" onclick="addGrocery('Eggs')">Eggs</button>
+<button id="clearbutton" onclick="clearGrocery()">Clear List</button>
+<div id="cart">Shopping Cart</div>
+
+<script>
+  // BONUS POINTS if you saved this variable outside the
+  // function so you can reuse it and not have to run
+  // document.getElementById() every time.
+  let addcart = document.getElementById('cart');
+  
+  // BONUS POINTS if you wrote this function with 1 parameter.
+  // Writing separate functions like addApple(), addTomato(),
+  // is fine too, but this make the function more reusable.
+    function addGrocery(food){
+        let titleGrocery = document.createElement('div');
+        titleGrocery.innerText = food;
+        cart.appendChild(titleGrocery);
+    }
+    function clearGrocery(){
+        cart.innerHTML = 'Shopping Cart';
+    }
+</script>
+
+ <!--Lenght Converter-->
+<div id="lenghtConversion"> 
+    <input id="lenghtConverter" placeholder="Insert lenght">
+    <button id="inchToCm" onclick="inchIntoCm()">Convert to cm</button>
+    <button id="cmToInch" onclick="cmIntoInch()">Convert to inches</button>
+    </div>
+    <div id="results"></div>
+    <script>
+     
+       const measurements = document.getElementById('lenghtConverter');
+    
+    function inchIntoCm(){
+        const lenght = lenghtConverter.value;
+        const inchlenght = +lenght * 2.54;
+        const titlelenght = document.createElement('div');
+        titlelenght.innerText = inchlenght;
+        results.appendChild(titlelenght);
+        //resets and put the new value
+        results.innerHTML = inchlenght;
+        }
+    
+    function cmIntoInch(){
+        let lenght = lenghtConverter.value;
+        const cmlenght = +lenght / 2.54;
+        const titlelenght = document.createElement('div');
+        titlelenght.innerText = cmlenght;
+        results.appendChild(titlelenght);
+        results.innerHTML = cmlenght;   
+    }
+    </script>
+
+<script>
+ //Shopping cart objects   
+ cartTotal([
+  { name: 'Apple', price: 4, quantity: 2 },
+  { name: 'Orange', price: 3, quantity: 3 }
+]);
+ //Calculate price
+function cartTotal(priceCart){
+    let totalPrice = 0;
+    priceCart.forEach(function (item) {
+        totalPrice = totalPrice + item.price * item.quantity;
+
+    });
+    console.log(totalPrice);
+}
+</script>
+
+<div id="receiptc">xx</div>
+
+
+<script>
+    const receiptc = document.getElementById('receiptc');
+  
+    function displayReceipte(cartArrayw) {
+      receiptc.innerHTML = '';
+  
+      cartArrayw.forEach(function (items) {
+        const receiptLine = document.createElement('div');
+        receiptLine.innerText = items.names + ' $' + items.prices + ' * ' + items.quantitys;
+        receiptc.appendChild(receiptLine);
+      });
+  
+      // You can also calculate the total using just the loop above, but I like
+      // to separate them out so each loop does one thing.
+      let cartTotalo = 0;
+      cartArrayw.forEach(function (items) {
+        cartTotalo = cartTotalo + items.prices * items.quantitys;
+      });
+  
+      const totalLines = document.createElement('div');
+      totalLines.innerText = 'Cart total = $' + cartTotalo;
+      receiptc.appendChild(totalLines);
+    }
+  
+    displayReceipte([
+      { names: 'Apple', prices: 4, quantitys: 2 },
+      { names: 'Orange', prices: 3, quantitys: 3 }
+    ]);
+  </script>
+
+<div id="receipt">x</div>
+
+<script>
+
+    const receipt = document.getElementById('receipt')
+   
+       function displayReceipt(cartArray){
+        receipt.innerHTML = '';
+   
+        cartArray.forEach(function (item) {
+           const itemsPrice = document.createElement('div');
+           itemsPrice.innerText = item.name + ' $' + item.price + ' * ' + item.quantity;
+           receipt.appendChild(itemsPrice);
+        });
+       
+        //cart Total
+        let cartTotal = 0;
+         cartArray.forEach(function (item) {
+           cartTotal = cartTotal + item.price * item.quantity;
+         });
+     
+         const totalLine = document.createElement('div');
+         totalLine.innerText = 'Cart total = $' + cartTotal;
+         receipt.appendChild(totalLine);
+   
+       }
+       displayReceipt([
+     { name: 'Apple', price: 5, quantity: 2 },
+     { name: 'Orange', price: 2, quantity: 3 }
+   ]);
+   </script>
+
+<script>
+let total = 0;
+
+function createCart(foodPrices) {
+  const foods = Object.keys(foodPrices);
+
+  foods.forEach(function (food) {
+    const cartItem = document.createElement('div');
+
+    // Here we get the food price using the food variable.
+    // If food = 'Apple', then foodPrices[food] is the same
+    // as foodPrices['Apple'], which is the same as foodPrices.Apple
+    const foodPrice = foodPrices[food];
+    cartItem.innerText = food + ' $' + foodPrice;
+
+    const addButton = document.createElement('button');
+    addButton.innerText = 'Add';
+
+    // Sorry I didn't teach this (I'll revise in the 2022 edition)!
+    // You'll have to use a function without a name here. If you
+    // create a separate addToCart() function, it will not have
+    // access to any of the variables in this function.
+    addButton.onclick = function () {
+      total = total + foodPrice;
+    };
+
+    cartItem.appendChild(addButton);
+
+    // This wil render each food with an "Add" button onto the webpage.
+    document.body.appendChild(cartItem);
+  });
+}
+
+createCart({ Apple: 3, Orange: 4, Egg: 2 });
+
+</script>
+
+<script>
+
+function temps(tempers){
+    const filterTemps = tempers.filter(function (temp) {
+      return temp >= 0;
+    });
+    console.log(temp)     
+  }
+  temps = ([-5, 5, 1, 4, -3, 0]);
+
+
+
+
+</script>
+
+<script>
+  foodArray = ([
+   { name: 'Apple', color: 'red'},
+   { name: 'Egg', color: 'white'},
+ ]);
+   function foodArray(removeRed){
+    return removeRed.filter(function (qrray){
+      return qrray.color !== 'red';
+    });
+
+  }
+
+
+
+</script>
+
+</body>
+</html>
